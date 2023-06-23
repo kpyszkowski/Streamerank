@@ -28,8 +28,14 @@
     "forceConsistentCasingInFileNames": true,
     "inlineSources": false,
     "preserveWatchOutput": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+
+    /* Absolute paths */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "types", "twin.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
