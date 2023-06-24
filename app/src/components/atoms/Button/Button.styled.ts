@@ -4,7 +4,7 @@ import tw, { styled } from 'twin.macro'
 export const StyledContainer = styled.button<{ $variant: ButtonVariantType }>(
   ({ $variant }) => [
     tw`border-2 border-current`,
-    $variant === 'primary' && tw`text-accent rounded-xl px-6 py-4`,
+    $variant === 'primary' && tw`font-medium text-accent rounded-xl px-12 py-4`,
     $variant === 'secondary' && tw`border-current rounded-lg px-9 py-2`,
     $variant === 'tertiary' && tw`text-2xl`,
   ],

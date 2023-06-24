@@ -5,6 +5,6 @@ export type ButtonVariantType = 'primary' | 'secondary' | 'tertiary'
 export interface ButtonProps
   extends PropsWithChildren,
     ComponentPropsWithoutRef<'button'> {
-  variant: ButtonVariantType
+  variant?: ButtonVariantType
   hiddenLabel?: string
 }

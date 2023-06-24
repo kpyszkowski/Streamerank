@@ -32,7 +32,8 @@
     /* Absolute paths */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "~/*": ["./*"]
     }
   },
   "include": ["src", "types", "twin.d.ts"],

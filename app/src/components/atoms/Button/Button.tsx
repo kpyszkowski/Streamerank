@@ -5,7 +5,7 @@ import {
 import type { ButtonProps } from '@/components/atoms/Button/Button.types'
 
 function Button(props: ButtonProps) {
-  const { children, variant, hiddenLabel = '', ...restProps } = props
+  const { children, variant = 'primary', hiddenLabel = '', ...restProps } = props
   return (
     <StyledContainer
       $variant={variant}
