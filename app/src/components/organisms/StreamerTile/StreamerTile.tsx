@@ -6,6 +6,7 @@ import {
   StyledLinksWrapper,
   StyledNameWrapper,
   StyledNickname,
+  StyledVoteForm,
 } from '@/components/organisms/StreamerTile/StreamerTile.styled'
 import type { StreamerTileProps } from '@/components/organisms/StreamerTile/StreamerTile.types'
 import 'twin.macro'
@@ -22,6 +23,8 @@ function StreamerTile(props: StreamerTileProps) {
     streamingUrl,
     avatarSrc,
     badgeIcon,
+    upVotesCount = 0,
+    downVotesCount = 0,
     ...restProps
   } = props
 
@@ -72,6 +75,12 @@ function StreamerTile(props: StreamerTileProps) {
           View profile
         </Button>
       </StyledLinksWrapper>
+      <StyledVoteForm
+        upVotesCount={upVotesCount}
+        downVotesCount={downVotesCount}
+        onUpVote={() => {}}
+        onDownVote={() => {}}
+      />
     </StyledContainer>
   )
 }

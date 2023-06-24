@@ -8,16 +8,16 @@ function Button(props: ButtonProps) {
   const {
     children,
     variant = 'primary',
-    href = '',
+    href,
     hiddenLabel = '',
     ...restProps
   } = props
   return (
     <StyledContainer
       $variant={variant}
-      {...restProps}
       as={href ? 'a' : 'button'}
-      href={href && href}
+      href={href}
+      {...restProps}
     >
       {hiddenLabel && <StyledHiddenLabel>{hiddenLabel}</StyledHiddenLabel>}
       {children}

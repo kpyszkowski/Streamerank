@@ -16,4 +16,6 @@ export interface StreamerTileProps {
   facebookUrl?: string
   instagramUrl?: string
   badgeIcon?: StreamerTileBadgeIconType
+  upVotesCount?: number
+  downVotesCount?: number
 }
