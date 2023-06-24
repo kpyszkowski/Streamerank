@@ -4,7 +4,7 @@ import patternSvg from '~/assets/pattern.svg'
 export const StyledContainer = styled.div(() => [
   tw`
     flex items-center justify-center relative
-    pt-48 min-h-screen md:min-h-[75vh] 
+    pt-32 min-h-screen md:min-h-[75vh] 
     bg-repeat bg-[size:.275rem] bg-blend-overlay
   `,
   css`
@@ -30,7 +30,7 @@ export const StyledContainer = styled.div(() => [
       opacity: 0.5;
       width: 100%;
       height: 1px;
-      max-width: ${theme`maxWidth.screen-lg`};
+      max-width: ${theme`maxWidth.screen-sm`};
     }
   `,
 ])
