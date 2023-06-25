@@ -84,7 +84,7 @@ function ProfileSummary(props: ProfileSummaryProps) {
           veniam!
         </StyledContent>
         <StyledLinksWrapper>
-          <Button>
+          <Button tw="whitespace-nowrap">
             <CiStreamOn strokeWidth={2} />
             Visit streaming channel
           </Button>
