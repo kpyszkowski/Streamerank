@@ -1,4 +1,4 @@
-import { TextField } from '@/components'
+import { FormField } from '@/components'
 import {
   StyledContainer,
   StyledParagraph,
@@ -10,27 +10,39 @@ function StreamerForm(props: PropsWithChildren) {
   return (
     <StyledContainer {...props}>
       <StyledParagraph>{children}</StyledParagraph>
-      <TextField
+      <FormField
         label="Full name"
         placeholder="eg. John Doe"
       />
-      <TextField
+      <FormField
         label="Nick name"
         placeholder="eg. StreamerGuy12"
       />
-      <TextField
-        label="Facebook profile URL"
-        placeholder="https://..."
+      <FormField
+        as="select"
+        label="Streaming platform"
+        placeholder="Eg. Twitch, YouTube..."
+        options={[
+          { label: 'Twitch', value: 'twitch' },
+          { label: 'YouTube', value: 'youtube' },
+          { label: 'TikTok', value: 'tiktok' },
+          { label: 'Kick', value: 'kick' },
+          { label: 'Rumble', value: 'rumble' },
+        ]}
       />
-      <TextField
-        label="Instagram profile URL"
-        placeholder="https://..."
-      />
-      <TextField
+      <FormField
         label="Streaming channel URL"
         placeholder="https://..."
       />
-      <TextField
+      <FormField
+        label="Facebook profile URL"
+        placeholder="https://..."
+      />
+      <FormField
+        label="Instagram profile URL"
+        placeholder="https://..."
+      />
+      <FormField
         as="textarea"
         label="Short description"
         placeholder="eg. He has truely wonderful live streams..."

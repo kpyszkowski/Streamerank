@@ -1,8 +1,8 @@
-import { TextField } from '@/components'
+import { FormField } from '@/components'
 import type { Meta, StoryObj } from '@storybook/react'
 
-const meta: Meta<typeof TextField> = {
-  component: TextField,
+const meta: Meta<typeof FormField> = {
+  component: FormField,
   args: {
     label: 'Label',
     placeholder: 'Placeholder...',
@@ -10,7 +10,7 @@ const meta: Meta<typeof TextField> = {
 }
 
 export default meta
-type Story = StoryObj<typeof TextField>
+type Story = StoryObj<typeof FormField>
 
 export const Default: Story = {}
 
@@ -30,5 +30,17 @@ export const WithErrorMessage: Story = {
 export const AsTextarea: Story = {
   args: {
     as: 'textarea',
+  },
+}
+
+export const AsSelect: Story = {
+  args: {
+    as: 'select',
+    options: [
+      { label: 'Tomato', value: '🍅' },
+      { label: 'Potato', value: '🥔' },
+      { label: 'Onion', value: '🧅' },
+      { label: 'Cabbage', value: '🥬' },
+    ],
   },
 }

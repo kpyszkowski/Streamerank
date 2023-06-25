@@ -1,23 +1,37 @@
-import type { TextFieldProps } from './TextField.types'
+import type { FormFieldProps } from './FormField.types'
 import {
   StyledContainer,
   StyledLabel,
   StyledInput,
   StyledErrorMessageWrapper,
   StyledErrorMessage,
-} from './TextField.styled'
+} from './FormField.styled'
 import { HiOutlineExclamationCircle } from 'react-icons/hi2'
 import 'twin.macro'
 
-function TextField(props: TextFieldProps) {
+function FormField(props: FormFieldProps) {
   const {
     label,
     className,
     errorMessage = '',
     isLabelHidden = false,
     as = 'input',
+    options = [],
+    placeholder,
     ...restProps
   } = props
+
+  const optionsWithPlaceholder = [
+    {
+      label: placeholder ?? 'Choose option...',
+      value: '',
+      disabled: true,
+      selected: true,
+      hidden: true,
+    },
+    ...options,
+  ]
+
   return (
     <StyledContainer className={className}>
       <StyledLabel $isHidden={isLabelHidden}>{label}</StyledLabel>
@@ -25,8 +39,20 @@ function TextField(props: TextFieldProps) {
         as={as}
         $isHigher={as === 'textarea'}
         $hasError={errorMessage.length > 0}
+        placeholder={placeholder}
         {...restProps}
-      />
+      >
+        {as === 'select' && options.length > 0
+          ? optionsWithPlaceholder.map(({ label, ...restOption }, index) => (
+              <option
+                key={index}
+                {...restOption}
+              >
+                {label}
+              </option>
+            ))
+          : null}
+      </StyledInput>
       {errorMessage.length > 0 && (
         <StyledErrorMessageWrapper>
           <HiOutlineExclamationCircle tw="stroke-current stroke-2" />
@@ -37,4 +63,4 @@ function TextField(props: TextFieldProps) {
   )
 }
 
-export default TextField
+export default FormField

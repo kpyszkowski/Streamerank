@@ -14,6 +14,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        emerald: {
+          1000: '#021d16',
+        },
         accent: {
           DEFAULT: colors.amber[400],
           lighter: colors.yellow[400],
@@ -27,7 +30,6 @@ export default {
         'hero-pattern': 'url("./assets/pattern.svg")',
       },
     },
-    colors,
     fontFamily: {
       heading: ['Syne', 'sans-serif'],
       sans: ['Poppins', 'sans-serif'],
