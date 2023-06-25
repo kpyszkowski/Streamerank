@@ -1,10 +1,9 @@
-import { Header, HeroSection, StreamerTile } from '@/components'
+import { HeroSection, Layout, StreamerTile } from '@/components'
 import 'twin.macro'
 
-function App() {
+function DashboardPage() {
   return (
-    <>
-      <Header />
+    <Layout>
       <HeroSection />
       <div tw="px-24 py-16 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-8">
         {Array(7)
@@ -21,8 +20,8 @@ function App() {
             />
           ))}
       </div>
-    </>
+    </Layout>
   )
 }
 
-export default App
+export default DashboardPage
