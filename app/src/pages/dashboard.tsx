@@ -1,11 +1,11 @@
-import { HeroSection, Layout, StreamerTile } from '@/components'
+import { BaseContainer, HeroSection, Layout, StreamerTile } from '@/components'
 import 'twin.macro'
 
 function DashboardPage() {
   return (
     <Layout>
       <HeroSection />
-      <div tw="px-24 py-16 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-8">
+      <BaseContainer tw="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-8">
         {Array(7)
           .fill(undefined)
           .map((_, index) => (
@@ -19,7 +19,7 @@ function DashboardPage() {
               badgeIcon="twitch"
             />
           ))}
-      </div>
+      </BaseContainer>
     </Layout>
   )
 }

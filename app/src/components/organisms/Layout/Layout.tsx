@@ -1,11 +1,12 @@
 import { Header } from '@/components'
+import { StyledWrapper } from '@/components/organisms/Layout/Layout.styled'
 import type { PropsWithChildren } from 'react'
 
 function Layout({ children }: PropsWithChildren) {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <StyledWrapper>{children}</StyledWrapper>
     </>
   )
 }

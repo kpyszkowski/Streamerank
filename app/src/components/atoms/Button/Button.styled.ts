@@ -5,7 +5,7 @@ export const StyledContainer = styled.button<{ $variant: ButtonVariantType }>(
   ({ $variant }) => [
     ($variant === 'primary' || $variant === 'secondary') &&
       tw`
-    flex items-center text-black bg-accent drop-shadow-lg transition hover:bg-accent-lighter
+    flex items-center justify-center text-black bg-accent drop-shadow-lg transition hover:bg-accent-lighter
     `,
     $variant === 'primary' &&
       tw`gap-4 font-medium rounded-t-xl rounded-b-lg shadow-[0_0.5rem_0_0] shadow-accent-darker px-12 py-4 mb-2 active:(shadow-[0_0_0_0] translate-y-2)`,

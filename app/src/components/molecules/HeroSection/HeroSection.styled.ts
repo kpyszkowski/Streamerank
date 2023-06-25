@@ -1,10 +1,11 @@
+import { BaseContainer } from '@/components'
 import tw, { css, styled, theme } from 'twin.macro'
 import patternSvg from '~/assets/pattern.svg'
 
-export const StyledContainer = styled.div(() => [
+export const StyledContainer = styled(BaseContainer)(() => [
   tw`
     flex items-center justify-center relative
-    pt-32 min-h-screen md:min-h-[75vh] 
+    min-h-screen md:min-h-[75vh] 
     bg-repeat bg-[size:.275rem] bg-blend-overlay
   `,
   css`
