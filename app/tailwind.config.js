@@ -1,5 +1,14 @@
 /** @type {import('tailwindcss').Config} */
-import colors from 'tailwindcss/colors'
+import baseColors from 'tailwindcss/colors'
+
+const colors = {
+  ...baseColors,
+  emerald: {
+    ...baseColors.emerald,
+    1000: '#021d16',
+  },
+}
+
 export default {
   content: [],
   theme: {
@@ -10,9 +19,6 @@ export default {
           lighter: colors.yellow[400],
           darker: colors.amber[500],
         },
-        emerald: {
-          1000: '#021d16',
-        },
         primary: colors.emerald[950],
         secondary: colors.teal[800],
         tertiary: colors.emerald[1000],
@@ -21,6 +27,7 @@ export default {
         'hero-pattern': 'url("./assets/pattern.svg")',
       },
     },
+    colors,
     fontFamily: {
       heading: ['Syne', 'sans-serif'],
       sans: ['Poppins', 'sans-serif'],

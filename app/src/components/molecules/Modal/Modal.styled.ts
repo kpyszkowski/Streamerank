@@ -10,6 +10,8 @@ export const StyledFooterContainer = tw(
 )`flex justify-end items-center`
 
 export const StyledModalContainer = tw.div`fixed w-screen h-screen top-0 right-0 z-20`
-export const StyledModalContentWrapper = tw.div`flex flex-col gap-6 bg-primary w-full h-full max-w-screen-md ml-auto`
-export const StyledModalBackdrop = tw.div`absolute w-screen h-screen inset-0 bg-black/25 -z-10`
-export const StyledModalContentContainer = tw(BaseContainer)`flex-1`
+export const StyledModalContentWrapper = tw.div`flex flex-col bg-primary w-full h-full max-w-screen-md ml-auto`
+export const StyledModalBackdrop = tw.div`absolute w-screen h-screen inset-0 bg-black/25 -z-10 backdrop-blur-sm`
+export const StyledModalContentContainer = tw(
+  BaseContainer,
+)`flex-1 overflow-y-scroll bg-tertiary`
