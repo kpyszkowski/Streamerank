@@ -3,6 +3,7 @@ import {
   StyledWrapper,
   StyledButton,
   StyledProgressBar,
+  StyledVotesNumber,
   StyledProgressBarContainer,
 } from '@/components/molecules/VoteForm/VoteForm.styled'
 import type { VoteFormProps } from '@/components/molecules/VoteForm/VoteForm.types'
@@ -24,6 +25,8 @@ function VoteForm(props: VoteFormProps) {
           <HiChevronUp size={24} />
         </StyledButton>
         <StyledProgressBarContainer>
+          <StyledVotesNumber>{upVotesCount}</StyledVotesNumber>
+          <StyledVotesNumber>{downVotesCount}</StyledVotesNumber>
           <StyledProgressBar
             style={{
               width: `${
