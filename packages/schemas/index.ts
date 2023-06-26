@@ -38,3 +38,5 @@ export const streamerSchema = yup
       .max(512, tooLongMessage(512)),
   })
   .required()
+  .noUnknown(true)
+  .strict()
