@@ -26,8 +26,8 @@ const Template = (props: any) => {
             eum autem! Veniam eos fugit, eum vitae ipsa laudantium sapiente sit
             animi.
           </Modal.Content>
-          <Modal.Footer
-            renderChildren={({ handleClose }) => (
+          <Modal.Footer>
+            {({ handleClose }) => (
               <Button
                 variant="secondary"
                 onClick={() => {
@@ -38,7 +38,7 @@ const Template = (props: any) => {
                 Close modal
               </Button>
             )}
-          />
+          </Modal.Footer>
         </Modal>
       )}
     </>

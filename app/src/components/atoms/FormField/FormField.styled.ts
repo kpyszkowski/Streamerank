@@ -4,11 +4,11 @@ export const StyledContainer = tw.label`flex flex-col gap-1.5`
 export const StyledInput = styled.input(
   ({ $hasError, $isHigher }: { $hasError: boolean; $isHigher: boolean }) => [
     tw`
-      w-full p-3 rounded-xl border-2 bg-transparent text-white border-neutral-400 outline-0
-      hover:border-neutral-400 placeholder:text-neutral-500 placeholder-shown:border-neutral-500
+      w-full p-3 rounded-xl border-2 bg-transparent text-white placeholder:text-neutral-500 outline-0
     `,
-    $hasError &&
-      tw`border-red-600 hover:border-red-500 focus-visible:border-red-600`,
+    $hasError
+      ? tw`border-red-600 hover:border-red-500 focus-visible:border-red-600`
+      : tw`border-neutral-400 hover:border-neutral-400 placeholder-shown:border-neutral-500`,
     $isHigher && tw`min-h-[320px] resize-none`,
   ],
 )

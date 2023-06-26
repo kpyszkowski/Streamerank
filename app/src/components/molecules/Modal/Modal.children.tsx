@@ -26,12 +26,12 @@ export function ModalHeader(props: PropsWithChildren) {
 }
 
 export function ModalFooter(props: ModalFooterProps) {
-  const { renderChildren, ...restProps } = props
+  const { children, ...restProps } = props
   const { handleClose = () => {} } = useContext(ModalContext)
 
   return (
     <StyledFooterContainer {...restProps}>
-      {renderChildren({ handleClose })}
+      {typeof children === 'function' ? children({ handleClose }) : children}
     </StyledFooterContainer>
   )
 }

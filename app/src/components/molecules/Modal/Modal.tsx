@@ -19,13 +19,13 @@ import 'twin.macro'
 export const ModalContext = createContext<ModalContextType>({})
 
 function Modal(props: ModalProps) {
-  const { children, setVisible, hideCloseButton = false } = props
+  const { children, setVisible, hideCloseButton = false, ...restProps } = props
 
   const handleClose = useCallback(() => setVisible(false), [setVisible])
 
   return createPortal(
     <ModalContext.Provider value={{ handleClose, hideCloseButton }}>
-      <StyledModalContainer>
+      <StyledModalContainer {...restProps}>
         <StyledModalContentWrapper>{children}</StyledModalContentWrapper>
         <StyledModalBackdrop onClick={handleClose} />
       </StyledModalContainer>

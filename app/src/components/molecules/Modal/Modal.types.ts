@@ -13,9 +13,9 @@ export interface ModalProps extends PropsWithChildren {
 type ModalCloseHandlerType = () => void
 
 export interface ModalFooterProps {
-  renderChildren: (renderProps: {
-    handleClose: ModalCloseHandlerType
-  }) => ReactNode
+  children:
+    | ((renderProps: { handleClose: ModalCloseHandlerType }) => ReactNode)
+    | ReactNode
 }
 
 export type ModalContextType = {

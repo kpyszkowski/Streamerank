@@ -8,8 +8,9 @@ import {
 } from './FormField.styled'
 import { HiOutlineExclamationCircle } from 'react-icons/hi2'
 import 'twin.macro'
+import { forwardRef } from 'react'
 
-function FormField(props: FormFieldProps) {
+const FormField = forwardRef<any, FormFieldProps>((props, ref) => {
   const {
     label,
     className,
@@ -26,7 +27,6 @@ function FormField(props: FormFieldProps) {
       label: placeholder ?? 'Choose option...',
       value: '',
       disabled: true,
-      selected: true,
       hidden: true,
     },
     ...options,
@@ -36,10 +36,12 @@ function FormField(props: FormFieldProps) {
     <StyledContainer className={className}>
       <StyledLabel $isHidden={isLabelHidden}>{label}</StyledLabel>
       <StyledInput
+        ref={ref}
         as={as}
         $isHigher={as === 'textarea'}
         $hasError={errorMessage.length > 0}
         placeholder={placeholder}
+        defaultValue=""
         {...restProps}
       >
         {as === 'select' && options.length > 0
@@ -61,6 +63,6 @@ function FormField(props: FormFieldProps) {
       )}
     </StyledContainer>
   )
-}
+})
 
 export default FormField
