@@ -1,18 +1,35 @@
-import type { NextFunction, Request, RequestHandler, Response } from 'express'
+import type { RequestHandlerWithoutNextFunctionType } from '@/types'
+import type { NextFunction, Request, Response } from 'express'
+import { MongooseError } from 'mongoose'
 
-const DEFAULT_ERROR_MESSAGE = 'Could not process your request'
+const DEFAULT_STATUS_CODE = 500
+const DEFAULT_MESSAGE = 'Could not process your request.'
+
+const ERROR_NAMES = {
+  500: 'ServerError',
+  400: 'BadRequestError',
+  401: 'UnauthorizedError',
+  403: 'ForbiddenError',
+  404: 'NotFoundError',
+}
+
+type ErrorStatusCodeType = keyof typeof ERROR_NAMES
 
 export class CustomError extends Error {
   statusCode: number
-  constructor(message: string) {
+  constructor(statusCode: ErrorStatusCodeType, message: string) {
     super(message)
-    this.statusCode = 500
+    this.statusCode = statusCode
+    this.name = ERROR_NAMES[statusCode]
   }
 }
 
 function CustomErrorFactory(statusCode: number) {
   return (message?: string) => {
-    const error = new CustomError(message ?? DEFAULT_ERROR_MESSAGE)
+    const error = new CustomError(
+      DEFAULT_STATUS_CODE,
+      message ?? DEFAULT_MESSAGE,
+    )
     error.statusCode = statusCode
     return error
   }
@@ -25,11 +42,21 @@ export const ForbiddenError = CustomErrorFactory(403)
 export const NotFoundError = CustomErrorFactory(404)
 
 export const handleErrors =
-  (controller: RequestHandler) =>
+  (controller: RequestHandlerWithoutNextFunctionType) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       await controller(req, res, next)
     } catch (error) {
+      console.log(error)
+
+      if (error instanceof MongooseError) {
+        const { message } = error
+        return res.status(DEFAULT_STATUS_CODE).json({
+          success: false,
+          message,
+        })
+      }
+
       if (error instanceof CustomError) {
         const { statusCode, message } = error
         return res.status(statusCode).json({
@@ -39,7 +66,7 @@ export const handleErrors =
       }
 
       return res
-        .status(500)
-        .json({ success: false, message: DEFAULT_ERROR_MESSAGE })
+        .status(DEFAULT_STATUS_CODE)
+        .json({ success: false, message: DEFAULT_MESSAGE })
     }
   }

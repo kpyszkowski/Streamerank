@@ -44,4 +44,4 @@ const streamerSchema = new Schema({
   },
 })
 
-export const ConversationModel = model('Streamer', streamerSchema)
+export const StreamerModel = model('Streamer', streamerSchema)

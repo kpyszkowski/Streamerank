@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "c4626b54-2217-464f-a4a2-ddb2945cfe9f",
+		"name": "Streamerank API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16796911"
+	},
+	"item": [
+		{
+			"name": "Get streamers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/streamers",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"streamers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get streamer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/streamer/{{$streamerId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"streamer",
+						"{{$streamerId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post streamer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"Piotr Skowyrski\",\n    \"nickName\": \"izakooo\",\n    \"platform\": \"twitch\",\n    \"streamingUrl\": \"https://www.twitch.tv/izakooo\",\n    \"facebookUrl\": \"https://www.facebook.com/izaktv\",\n    \"description\": \"Piotrek ma 35 lat i streamuje prawie 10 lat! To jego praca i pasja jednocześnie. Jest znany z mnie komentowania CS:GO i faktycznie to zawsze była podstawa jego kanału! W wolnych chwilach gra w CS:GO, Warzone i masę innych gier :) Nieskromnie mówi o sobie, że jestem najśmieszniejszym streamerem na twitchu.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/streamers",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"streamers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upvote streamer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"Piotr Skowyrski\",\n    \"nickName\": \"izakooo\",\n    \"platform\": \"twitch\",\n    \"streamingUrl\": \"https://www.twitch.tv/izakooo\",\n    \"facebookUrl\": \"https://www.facebook.com/izaktv\",\n    \"description\": \"Piotrek ma 35 lat i streamuje prawie 10 lat! To jego praca i pasja jednocześnie. Jest znany z mnie komentowania CS:GO i faktycznie to zawsze była podstawa jego kanału! W wolnych chwilach gra w CS:GO, Warzone i masę innych gier :) Nieskromnie mówi o sobie, że jestem najśmieszniejszym streamerem na twitchu.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/streamer/{{$streamerId}}/vote/up",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"streamer",
+						"{{$streamerId}}",
+						"vote",
+						"up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Downvote streamer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"Piotr Skowyrski\",\n    \"nickName\": \"izakooo\",\n    \"platform\": \"twitch\",\n    \"streamingUrl\": \"https://www.twitch.tv/izakooo\",\n    \"facebookUrl\": \"https://www.facebook.com/izaktv\",\n    \"description\": \"Piotrek ma 35 lat i streamuje prawie 10 lat! To jego praca i pasja jednocześnie. Jest znany z mnie komentowania CS:GO i faktycznie to zawsze była podstawa jego kanału! W wolnych chwilach gra w CS:GO, Warzone i masę innych gier :) Nieskromnie mówi o sobie, że jestem najśmieszniejszym streamerem na twitchu.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/streamer/{{$streamerId}}/vote/down",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"streamer",
+						"{{$streamerId}}",
+						"vote",
+						"down"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "$streamerId",
+			"value": "649a1b67c774baff52e424cc"
+		}
+	]
+}

@@ -5,6 +5,7 @@ import cors from 'cors'
 import 'dotenv/config'
 import { configureDatabase } from '@/configs'
 import { handleErrors } from '@/helpers'
+import { streamersRouter } from '@/routers'
 
 const { PORT, MONGODB_USER, MONGODB_HOST, MONGODB_PASSWORD, MONGODB_PORT } =
   process.env
@@ -19,6 +20,8 @@ configureDatabase({
 const app = express()
 app.use(cors())
 app.use(json())
+
+app.use(streamersRouter)
 
 app.get(
   '/',
