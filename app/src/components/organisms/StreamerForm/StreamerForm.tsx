@@ -4,7 +4,7 @@ import {
   StyledForm,
   StyledParagraph,
 } from '@/components/organisms/StreamerForm/StreamerForm.styled'
-import { streamerFormSchema } from '@/schemas'
+import { streamerSchema } from 'schemas'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import type { StreamerFormProps } from '@/components/organisms/StreamerForm/StreamerForm.types'
@@ -15,7 +15,7 @@ function StreamerForm(props: StreamerFormProps) {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ resolver: yupResolver(streamerFormSchema) })
+  } = useForm({ resolver: yupResolver(streamerSchema) })
 
   return (
     <Modal setVisible={modalSetter}>

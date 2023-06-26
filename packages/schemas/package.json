@@ -1,0 +1,13 @@
+{
+  "name": "schemas",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-config-custom": "workspace:^"
+  },
+  "dependencies": {
+    "yup": "^1.2.0"
+  }
+}

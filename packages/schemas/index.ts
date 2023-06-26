@@ -6,7 +6,7 @@ const urlRegexMessage = (name: string) => `This is not valid ${name} url.`
 const tooLongMessage = (length: number) =>
   `This value is too long, max ${length} characters.`
 
-export const streamerFormSchema = yup
+export const streamerSchema = yup
   .object({
     fullName: yup
       .string()
