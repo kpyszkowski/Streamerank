@@ -8,7 +8,7 @@ export type StreamingPlatformType =
 export type StreamerType = {
   fullName: string
   nickName: string
-  platform: StreamingPlatformType
+  platform?: StreamingPlatformType
   streamingUrl: string
   facebookUrl?: string
   instagramUrl?: string

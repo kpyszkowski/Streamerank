@@ -9,4 +9,4 @@ export const StyledNickname = tw.div`text-neutral-200`
 export const StyledLinksWrapper = tw.div`flex justify-start gap-6 px-8 py-4 bg-primary/25`
 export const StyledVoteForm = tw(
   VoteForm,
-)`px-8 py-4 bg-secondary/25 rounded-b-xl`
+)`px-8 py-6 bg-secondary/25 rounded-b-xl`

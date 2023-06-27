@@ -3,10 +3,9 @@ import { StyledWrapper } from '@/components/organisms/Layout/Layout.styled'
 import type { PropsWithChildren } from 'react'
 import { useLocation } from 'react-router-dom'
 
-function Layout({ children }: PropsWithChildren) {
+function Layout(props: PropsWithChildren) {
+  const { children } = props
   const location = useLocation()
-  console.log(location)
-
   return (
     <>
       <Header isSubmitButtonHidden={location.pathname !== '/'} />

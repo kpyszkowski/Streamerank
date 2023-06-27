@@ -10,10 +10,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import type { StreamerFormProps } from '@/components/organisms/StreamerForm/StreamerForm.types'
 import { useStreamerFormState } from '@/store'
 import { useCallback } from 'react'
+import { axios } from '@/helpers'
 
 function StreamerForm(props: StreamerFormProps) {
-  const { children, modalSetter } = props
-  const { setData, ...defaultValues } = useStreamerFormState()
+  const { children, modalStateSetter } = props
+  const { setData, clearData, ...defaultValues } = useStreamerFormState()
   const {
     register,
     formState: { errors },
@@ -30,13 +31,30 @@ function StreamerForm(props: StreamerFormProps) {
     setData(formState)
   }, [getValues, setData])
 
+  const handleFormSubmission = useCallback(
+    handleSubmit(async (data) => {
+      try {
+        const { data: newStreamer } = await axios.post('/streamers', data)
+        // TODO: Implement success message
+        console.log({ newStreamer })
+
+        modalStateSetter(false)
+        clearData()
+      } catch (error) {
+        // TODO: Implement error handling
+        console.log({ error })
+      }
+    }),
+    [handleSubmit, modalStateSetter, clearData],
+  )
+
   return (
     <Modal
-      setVisible={modalSetter}
+      setVisible={modalStateSetter}
       onClose={handleFormStatePersistence}
     >
       <Modal.Header>Submit your streamer</Modal.Header>
-      <StyledForm onSubmit={handleSubmit((data) => console.log(data))}>
+      <StyledForm onSubmit={handleFormSubmission}>
         <Modal.Content>
           <StyledContainer {...props}>
             <StyledParagraph>{children}</StyledParagraph>

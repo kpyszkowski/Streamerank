@@ -12,6 +12,7 @@ const createStreamerFormSlice: StateCreator<
   streamingUrl: '',
   description: '',
   setData: (data) => set((state) => ({ ...state, ...data })),
+  clearData: () => set(() => ({})),
 })
 
 export const useStreamerFormState = create<StreamerFormStoreSliceType>()(

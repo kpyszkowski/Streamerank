@@ -18,7 +18,7 @@ function Header(props: HeaderProps) {
         )}
       </StyledContainer>
       {isFormModalVisible && (
-        <StreamerForm modalSetter={setFormModalVisible}>
+        <StreamerForm modalStateSetter={setFormModalVisible}>
           Submit your favourite streamers and let other know about them.
           <br />
           Watch them going up the ranking ang gaining popularity!
