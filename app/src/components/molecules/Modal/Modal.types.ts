@@ -8,6 +8,7 @@ import type {
 export interface ModalProps extends PropsWithChildren {
   setVisible: Dispatch<SetStateAction<boolean>>
   hideCloseButton?: boolean
+  onClose?: () => void
 }
 
 type ModalCloseHandlerType = () => void

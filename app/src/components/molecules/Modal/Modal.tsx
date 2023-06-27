@@ -19,9 +19,18 @@ import 'twin.macro'
 export const ModalContext = createContext<ModalContextType>({})
 
 function Modal(props: ModalProps) {
-  const { children, setVisible, hideCloseButton = false, ...restProps } = props
+  const {
+    children,
+    setVisible,
+    hideCloseButton = false,
+    onClose,
+    ...restProps
+  } = props
 
-  const handleClose = useCallback(() => setVisible(false), [setVisible])
+  const handleClose = useCallback(() => {
+    setVisible(false)
+    onClose && onClose()
+  }, [setVisible, onClose])
 
   return createPortal(
     <ModalContext.Provider value={{ handleClose, hideCloseButton }}>

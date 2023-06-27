@@ -8,24 +8,37 @@ import { streamerSchema } from 'schemas'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import type { StreamerFormProps } from '@/components/organisms/StreamerForm/StreamerForm.types'
+import { useStreamerFormState } from '@/store'
+import { useCallback } from 'react'
 
 function StreamerForm(props: StreamerFormProps) {
   const { children, modalSetter } = props
+  const { setData, ...defaultValues } = useStreamerFormState()
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ resolver: yupResolver(streamerSchema) })
+    getValues,
+  } = useForm({
+    // @ts-ignore TODO: Fix resolver typings issue related with defaultValues
+    resolver: yupResolver(streamerSchema),
+    defaultValues,
+  })
+
+  const handleFormStatePersistence = useCallback(() => {
+    const formState = getValues()
+    setData(formState)
+  }, [getValues, setData])
 
   return (
-    <Modal setVisible={modalSetter}>
+    <Modal
+      setVisible={modalSetter}
+      onClose={handleFormStatePersistence}
+    >
       <Modal.Header>Submit your streamer</Modal.Header>
       <StyledForm onSubmit={handleSubmit((data) => console.log(data))}>
         <Modal.Content>
-          <StyledContainer
-            onSubmit={() => console.log('dupa')}
-            {...props}
-          >
+          <StyledContainer {...props}>
             <StyledParagraph>{children}</StyledParagraph>
             <FormField
               label="Full name"
