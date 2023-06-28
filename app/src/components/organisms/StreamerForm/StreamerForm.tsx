@@ -1,4 +1,4 @@
-import { Button, FormField, Modal } from '@/components'
+import { Button, FormField, Message, Modal } from '@/components'
 import {
   StyledContainer,
   StyledForm,
@@ -10,43 +10,46 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import type { StreamerFormProps } from '@/components/organisms/StreamerForm/StreamerForm.types'
 import { useStreamerFormState } from '@/store'
 import { useCallback } from 'react'
-import { axios } from '@/helpers'
+import { postStreamer } from '@/helpers'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import type { StreamerType } from 'types'
+import 'twin.macro'
 
 function StreamerForm(props: StreamerFormProps) {
   const { children, modalStateSetter } = props
+  const queryClient = useQueryClient()
   const { setData, clearData, ...defaultValues } = useStreamerFormState()
   const {
     register,
     formState: { errors },
     handleSubmit,
     getValues,
+    reset,
   } = useForm({
     // @ts-ignore TODO: Fix resolver typings issue related with defaultValues
     resolver: yupResolver(streamerSchema),
     defaultValues,
   })
+  const { mutate, isError } = useMutation({
+    mutationFn: postStreamer,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['streamers'])
+      clearData()
+      modalStateSetter(false)
+    },
+  })
+
+  const handleMutation = useCallback(
+    (data: StreamerType) => {
+      mutate(data, { onSuccess: () => reset() })
+    },
+    [mutate, reset],
+  )
 
   const handleFormStatePersistence = useCallback(() => {
     const formState = getValues()
     setData(formState)
   }, [getValues, setData])
-
-  const handleFormSubmission = useCallback(
-    handleSubmit(async (data) => {
-      try {
-        const { data: newStreamer } = await axios.post('/streamers', data)
-        // TODO: Implement success message
-        console.log({ newStreamer })
-
-        modalStateSetter(false)
-        clearData()
-      } catch (error) {
-        // TODO: Implement error handling
-        console.log({ error })
-      }
-    }),
-    [handleSubmit, modalStateSetter, clearData],
-  )
 
   return (
     <Modal
@@ -54,7 +57,7 @@ function StreamerForm(props: StreamerFormProps) {
       onClose={handleFormStatePersistence}
     >
       <Modal.Header>Submit your streamer</Modal.Header>
-      <StyledForm onSubmit={handleFormSubmission}>
+      <StyledForm onSubmit={handleSubmit(handleMutation)}>
         <Modal.Content>
           <StyledContainer {...props}>
             <StyledParagraph>{children}</StyledParagraph>
@@ -112,6 +115,15 @@ function StreamerForm(props: StreamerFormProps) {
           </StyledContainer>
         </Modal.Content>
         <Modal.Footer>
+          {isError && (
+            <Message
+              variant="error"
+              tw="mr-auto"
+            >
+              Oh no, we couldn't submit your streamer.
+              <br /> Please try again later.
+            </Message>
+          )}
           <Button>Submit</Button>
         </Modal.Footer>
       </StyledForm>

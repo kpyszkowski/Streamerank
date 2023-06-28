@@ -26,6 +26,9 @@ function ProfileSummary(props: ProfileSummaryProps) {
     streamingUrl,
     instagramUrl,
     facebookUrl,
+    description,
+    upVotes,
+    downVotes,
     ...restProps
   } = props
 
@@ -43,60 +46,43 @@ function ProfileSummary(props: ProfileSummaryProps) {
         <StyledVotesWrapper>
           <StyledVote>
             <HiChevronUp size={24} />
-            24
+            {upVotes}
           </StyledVote>
           <StyledVote $isRed>
-            <HiChevronDown size={24} />3
+            <HiChevronDown size={24} />
+            {downVotes}
           </StyledVote>
         </StyledVotesWrapper>
       </StyledTopWrapper>
       <StyledContentWrapper>
-        <StyledContent>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque libero
-          sint tempora illo, culpa nulla doloremque, cumque vero eum, quae
-          suscipit deserunt reiciendis enim. Sunt perspiciatis eius non dicta
-          quas. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          Quibusdam facere cum illo corrupti magni et quos, fuga, delectus
-          ratione nam minus temporibus officiis, porro molestias alias veniam!
-          Est, delectus voluptatum? Lorem, ipsum dolor sit amet consectetur
-          adipisicing elit. Earum, nam. Atque nihil id culpa veritatis
-          distinctio vero esse voluptatibus a obcaecati aliquid, perferendis
-          laborum, aspernatur debitis earum, iste alias veniam!Lorem ipsum dolor
-          sit amet consectetur adipisicing elit. Itaque libero sint tempora
-          illo, culpa nulla doloremque, cumque vero eum, quae suscipit deserunt
-          reiciendis enim. Sunt perspiciatis eius non dicta quas. Lorem ipsum
-          dolor sit, amet consectetur adipisicing elit. Quibusdam facere cum
-          illo corrupti magni et quos, fuga, delectus ratione nam minus
-          temporibus officiis, porro molestias alias veniam! Est, delectus
-          voluptatum? Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Earum, nam. Atque nihil id culpa veritatis distinctio vero esse
-          voluptatibus a obcaecati aliquid, perferendis laborum, aspernatur
-          debitis earum, iste alias veniam!Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Itaque libero sint tempora illo, culpa
-          nulla doloremque, cumque vero eum, quae suscipit deserunt reiciendis
-          enim. Sunt perspiciatis eius non dicta quas. Lorem ipsum dolor sit,
-          amet consectetur adipisicing elit. Quibusdam facere cum illo corrupti
-          magni et quos, fuga, delectus ratione nam minus temporibus officiis,
-          porro molestias alias veniam! Est, delectus voluptatum? Lorem, ipsum
-          dolor sit amet consectetur adipisicing elit. Earum, nam. Atque nihil
-          id culpa veritatis distinctio vero esse voluptatibus a obcaecati
-          aliquid, perferendis laborum, aspernatur debitis earum, iste alias
-          veniam!
-        </StyledContent>
+        <StyledContent>{description}</StyledContent>
         <StyledLinksWrapper>
-          <Button tw="whitespace-nowrap">
+          <Button
+            tw="whitespace-nowrap"
+            href={streamingUrl}
+          >
             <CiStreamOn strokeWidth={2} />
             Visit streaming channel
           </Button>
           <StyledSocialsWrapper>
-            <Button variant="tertiary">
-              <FaFacebookF />
-              Facebook
-            </Button>
-            <Button variant="tertiary">
-              <FaInstagram />
-              Instagram
-            </Button>
+            {facebookUrl && (
+              <Button
+                variant="tertiary"
+                href={facebookUrl}
+              >
+                <FaFacebookF />
+                Facebook
+              </Button>
+            )}
+            {instagramUrl && (
+              <Button
+                variant="tertiary"
+                href={instagramUrl}
+              >
+                <FaInstagram />
+                Instagram
+              </Button>
+            )}
           </StyledSocialsWrapper>
         </StyledLinksWrapper>
       </StyledContentWrapper>

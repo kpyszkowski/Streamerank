@@ -7,7 +7,7 @@ export const StyledHeaderContainer = tw(
 export const StyledHeaderWrapper = tw.h2`text-2xl font-medium`
 export const StyledFooterContainer = tw(
   BaseContainer,
-)`flex justify-end items-center`
+)`flex justify-end items-center gap-8`
 
 export const StyledModalContainer = tw.div`fixed w-screen h-screen top-0 right-0 z-20`
 export const StyledModalContentWrapper = tw.div`flex flex-col bg-primary w-full h-full max-w-screen-md ml-auto`

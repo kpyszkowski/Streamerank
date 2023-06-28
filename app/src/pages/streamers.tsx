@@ -1,10 +1,17 @@
 import { BaseContainer, Layout, ProfileSummary } from '@/components'
+import { getStreamer } from '@/helpers'
+import { useQuery } from '@tanstack/react-query'
 import { HiArrowLeft } from 'react-icons/hi'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import 'twin.macro'
 
 function StreamersPage() {
+  const { streamerId } = useParams()
+  const { data, isSuccess, isError, isLoading } = useQuery([streamerId], () =>
+    getStreamer(streamerId!),
+  )
   const navigate = useNavigate()
+
   return (
     <Layout>
       <BaseContainer tw="pb-24">
@@ -15,16 +22,29 @@ function StreamersPage() {
           <HiArrowLeft />
           Go back to dashboard
         </button>
-        <ProfileSummary
-          fullName={'Average Streamer'}
-          nickName={'xXxStreamLordxXx'}
-          avatarSrc={
-            'https://static-cdn.jtvnw.net/jtv_user_pictures/asmongold-profile_image-f7ddcbd0332f5d28-300x300.png'
-          }
-          streamingUrl={'#'}
-          facebookUrl={'#'}
-          instagramUrl={'#'}
-        />
+        {(isError || isLoading) && (
+          <>
+            {isLoading && 'Loading...'}
+            {isError && (
+              <>
+                <h1 tw="text-6xl font-heading leading-normal tracking-tighter">
+                  Aaargh, so sorry! 😢
+                </h1>
+                <h2 tw="text-4xl leading-loose">
+                  We couldn't make it, please try again later
+                </h2>
+              </>
+            )}
+          </>
+        )}
+        {isSuccess && (
+          <ProfileSummary
+            {...data}
+            avatarSrc={
+              'https://static-cdn.jtvnw.net/jtv_user_pictures/asmongold-profile_image-f7ddcbd0332f5d28-300x300.png'
+            }
+          />
+        )}
       </BaseContainer>
     </Layout>
   )

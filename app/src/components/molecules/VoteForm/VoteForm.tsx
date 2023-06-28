@@ -1,3 +1,4 @@
+import { Message } from '@/components'
 import {
   StyledContainer,
   StyledHeadingWrapper,
@@ -6,15 +7,10 @@ import {
   StyledProgressBar,
   StyledVotesNumber,
   StyledProgressBarContainer,
-  StyledSubmissionNotice,
 } from '@/components/molecules/VoteForm/VoteForm.styled'
 import type { VoteFormProps } from '@/components/molecules/VoteForm/VoteForm.types'
 import { useState } from 'react'
-import {
-  HiChevronDown,
-  HiChevronUp,
-  HiOutlineInformationCircle,
-} from 'react-icons/hi'
+import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 
 function VoteForm(props: VoteFormProps) {
   const { upVotesCount, downVotesCount, onUpVote, onDownVote, ...restProps } =
@@ -36,10 +32,7 @@ function VoteForm(props: VoteFormProps) {
       <StyledHeadingWrapper>
         Cast your vote
         {isVoteRequested && (
-          <StyledSubmissionNotice>
-            <HiOutlineInformationCircle size={16} />
-            Press again to confirm
-          </StyledSubmissionNotice>
+          <Message variant="info">Press again to confirm</Message>
         )}
       </StyledHeadingWrapper>
       <StyledWrapper>

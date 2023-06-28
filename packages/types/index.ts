@@ -15,4 +15,10 @@ export type StreamerType = {
   description: string
 }
 
+export type StreamerRecordType = StreamerType & {
+  _id: string
+  upVotes: number
+  downVotes: number
+}
+
 export type StreamerVoteType = 'up' | 'down'

@@ -1,5 +1,6 @@
 export { default as BaseContainer } from './atoms/BaseContainer/BaseContainer'
 export { default as Button } from './atoms/Button/Button'
+export { default as Message } from './atoms/Message/Message'
 export { default as Logo } from './atoms/Logo/Logo'
 export { default as FormField } from './atoms/FormField/FormField'
 export { default as Avatar } from './molecules/Avatar/Avatar'

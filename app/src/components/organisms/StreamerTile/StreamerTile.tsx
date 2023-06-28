@@ -68,7 +68,7 @@ function StreamerTile(props: StreamerTileProps) {
         )}
         <Button
           variant="tertiary"
-          href={'#' + streamerId}
+          href={`/streamers/${streamerId}`}
           tw="ml-auto"
         >
           <FaUser />

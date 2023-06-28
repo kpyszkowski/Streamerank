@@ -1,8 +1,8 @@
-export interface ProfileSummaryProps {
-  fullName: string
-  nickName: string
+import type { StreamerType } from 'types'
+
+export interface ProfileSummaryProps extends StreamerType {
+  description: string
+  upVotes: number
+  downVotes: number
   avatarSrc: string
-  streamingUrl: string
-  facebookUrl?: string
-  instagramUrl?: string
 }
