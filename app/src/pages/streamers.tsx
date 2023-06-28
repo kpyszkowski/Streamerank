@@ -8,7 +8,7 @@ import 'twin.macro'
 function StreamersPage() {
   const { streamerId } = useParams()
   const { data, isSuccess, isError, isLoading } = useQuery([streamerId], () =>
-    getStreamer(streamerId!),
+    getStreamer(streamerId!), 
   )
   const navigate = useNavigate()
 

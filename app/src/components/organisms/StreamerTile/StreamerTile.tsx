@@ -12,6 +12,8 @@ import type { StreamerTileProps } from '@/components/organisms/StreamerTile/Stre
 import 'twin.macro'
 import { CiStreamOn } from 'react-icons/ci'
 import { FaInstagram, FaFacebookF, FaUser } from 'react-icons/fa'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { downVoteStreamer, upVoteStreamer } from '@/helpers'
 
 function StreamerTile(props: StreamerTileProps) {
   const {
@@ -27,6 +29,20 @@ function StreamerTile(props: StreamerTileProps) {
     downVotesCount = 0,
     ...restProps
   } = props
+
+  const queryClient = useQueryClient()
+  const { mutate: mutateUpVote } = useMutation({
+    mutationFn: () => upVoteStreamer(streamerId),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['streamers'])
+    },
+  })
+  const { mutate: mutateDownVote } = useMutation({
+    mutationFn: () => downVoteStreamer(streamerId),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['streamers'])
+    },
+  })
 
   return (
     <StyledContainer {...restProps}>
@@ -78,8 +94,8 @@ function StreamerTile(props: StreamerTileProps) {
       <StyledVoteForm
         upVotesCount={upVotesCount}
         downVotesCount={downVotesCount}
-        onUpVote={() => {}}
-        onDownVote={() => {}}
+        onUpVote={mutateUpVote}
+        onDownVote={mutateDownVote}
       />
     </StyledContainer>
   )

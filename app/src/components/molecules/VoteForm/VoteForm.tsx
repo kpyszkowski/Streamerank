@@ -11,27 +11,36 @@ import {
 import type { VoteFormProps } from '@/components/molecules/VoteForm/VoteForm.types'
 import { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
+import type { StreamerVoteType } from 'types'
 
 function VoteForm(props: VoteFormProps) {
   const { upVotesCount, downVotesCount, onUpVote, onDownVote, ...restProps } =
     props
 
-  const [isVoteRequested, setIsVoteRequested] = useState(false)
+  const [requestedVoteType, setRequestedVoteType] =
+    useState<StreamerVoteType | null>(null)
 
-  const handleVote = (fn: any) => () => {
-    if (isVoteRequested) {
-      fn()
-      setIsVoteRequested(false)
-      return
+  const handleVote =
+    (voteTrigger: () => void, voteType: StreamerVoteType) => () => {
+      if (!requestedVoteType) {
+        setRequestedVoteType(voteType)
+        return
+      }
+      if (requestedVoteType === voteType) {
+        voteTrigger()
+        setRequestedVoteType(null)
+        return
+      }
+      if (requestedVoteType !== voteType) {
+        setRequestedVoteType(null)
+      }
     }
-    setIsVoteRequested(true)
-  }
 
   return (
     <StyledContainer {...restProps}>
       <StyledHeadingWrapper>
         Cast your vote
-        {isVoteRequested && (
+        {requestedVoteType && (
           <Message variant="info">Press again to confirm</Message>
         )}
       </StyledHeadingWrapper>
@@ -39,7 +48,7 @@ function VoteForm(props: VoteFormProps) {
         <StyledButton
           variant="secondary"
           hiddenLabel="Upvote streamer"
-          onClick={handleVote(onUpVote)}
+          onClick={handleVote(onUpVote, 'up')}
         >
           <HiChevronUp size={24} />
         </StyledButton>
@@ -57,7 +66,7 @@ function VoteForm(props: VoteFormProps) {
         <StyledButton
           variant="secondary"
           hiddenLabel="Downvote streamer"
-          onClick={handleVote(onDownVote)}
+          onClick={handleVote(onDownVote, 'down')}
         >
           <HiChevronDown size={24} />
         </StyledButton>

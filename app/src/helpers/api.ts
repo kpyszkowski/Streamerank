@@ -33,11 +33,11 @@ export const getStreamer = async (
 }
 
 export const upVoteStreamer = async (streamerId: string) => {
-  const response = await instance.get(`/streamers/${streamerId}/vote/up`)
+  const response = await instance.put(`/streamers/${streamerId}/vote/up`)
   return response
 }
 
 export const downVoteStreamer = async (streamerId: string) => {
-  const response = await instance.get(`/streamers/${streamerId}/vote/down`)
+  const response = await instance.put(`/streamers/${streamerId}/vote/down`)
   return response
 }

@@ -3,10 +3,13 @@ import { getStreamers } from '@/helpers'
 import { useQuery } from '@tanstack/react-query'
 import 'twin.macro'
 
+const { VITE_DASHBOARD_POOLING_INTERVAL = 1000 * 60 * 4 } = import.meta.env
+
 function DashboardPage() {
   const { data, isSuccess, isError, isLoading } = useQuery(
     ['streamers'],
     getStreamers,
+    { refetchInterval: VITE_DASHBOARD_POOLING_INTERVAL },
   )
   return (
     <Layout>
@@ -25,16 +28,20 @@ function DashboardPage() {
         </BaseContainer>
       )}
       {isSuccess && (
-        <BaseContainer tw="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-8">
-          {data.map(({ _id, platform, ...streamerData }) => (
-            <StreamerTile
-              key={_id}
-              avatarSrc="https://static-cdn.jtvnw.net/jtv_user_pictures/asmongold-profile_image-f7ddcbd0332f5d28-300x300.png"
-              streamerId={_id}
-              badgeIcon={platform}
-              {...streamerData}
-            />
-          ))}
+        <BaseContainer tw="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-x-12 gap-y-8">
+          {data.map(
+            ({ _id, platform, upVotes, downVotes, ...streamerData }) => (
+              <StreamerTile
+                key={_id}
+                avatarSrc="https://static-cdn.jtvnw.net/jtv_user_pictures/asmongold-profile_image-f7ddcbd0332f5d28-300x300.png"
+                streamerId={_id}
+                badgeIcon={platform}
+                upVotesCount={upVotes}
+                downVotesCount={downVotes}
+                {...streamerData}
+              />
+            ),
+          )}
         </BaseContainer>
       )}
     </Layout>
