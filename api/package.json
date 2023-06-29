@@ -5,8 +5,9 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "rimraf ./dist && tsc",
-    "start:dev": "nodemon",
-    "start:prod": "pnpm run build && node dist/index.js"
+    "db": "docker-compose up -d",
+    "dev": "pnpm run db && nodemon",
+    "prod": "pnpm run build && node dist/index.js"
   },
   "keywords": [],
   "author": "",
