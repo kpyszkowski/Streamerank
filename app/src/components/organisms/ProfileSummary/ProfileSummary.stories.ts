@@ -15,14 +15,6 @@ const meta: Meta<typeof ProfileSummary> = {
 export default meta
 type Story = StoryObj<typeof ProfileSummary>
 
-export const Small: Story = {}
-
-export const Large: Story = {
-  args: {
-    size: 'large',
-  },
-}
-
 export const Default: Story = {
   args: {
     facebookUrl: '#',

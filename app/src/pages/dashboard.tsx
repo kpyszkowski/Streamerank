@@ -1,7 +1,33 @@
-import { BaseContainer, HeroSection, Layout, StreamerTile } from '@/components'
+import {
+  BaseContainer,
+  ErrorMessage,
+  HeroSection,
+  Layout,
+  StreamerTile,
+} from '@/components'
 import { getStreamers } from '@/helpers'
 import { useQuery } from '@tanstack/react-query'
 import 'twin.macro'
+import { motion } from 'framer-motion'
+import type { Variants } from 'framer-motion'
+
+const MotionBaseContainer = motion(BaseContainer)
+const MotionStreamerTile = motion(StreamerTile)
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+}
+
+const streamerTileVariants: Variants = {
+  hidden: { x: -35, y: -15, opacity: 0 },
+  visible: { x: 0, y: 0, opacity: 1 },
+}
 
 const { VITE_DASHBOARD_POOLING_INTERVAL = 1000 * 60 * 4 } = import.meta.env
 
@@ -15,23 +41,27 @@ function DashboardPage() {
     <Layout>
       <HeroSection />
       {(isError || isLoading) && (
-        <BaseContainer tw="text-center">
-          {isLoading && 'Loading...'}
-          {isError && (
-            <>
-              <h1 tw="text-6xl font-heading leading-normal tracking-tighter">
-                Oh crap! 😓
-              </h1>
-              <h2 tw="text-4xl leading-loose">Please try again later</h2>
-            </>
-          )}
+        <BaseContainer>
+          <ErrorMessage isColoured>
+            <ErrorMessage.Heading>{isError && 'Oh no...'}</ErrorMessage.Heading>
+            <ErrorMessage.Text>
+              {isError ? 'Please try again later' : 'Loading...'}
+            </ErrorMessage.Text>
+          </ErrorMessage>
         </BaseContainer>
       )}
       {isSuccess && (
-        <BaseContainer tw="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-x-12 gap-y-8">
+        <MotionBaseContainer
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          layout
+          tw="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-x-12 gap-y-8"
+        >
           {data.map(
             ({ _id, platform, upVotes, downVotes, ...streamerData }) => (
-              <StreamerTile
+              <MotionStreamerTile
+                variants={streamerTileVariants}
                 key={_id}
                 avatarSrc="https://static-cdn.jtvnw.net/jtv_user_pictures/asmongold-profile_image-f7ddcbd0332f5d28-300x300.png"
                 streamerId={_id}
@@ -42,7 +72,7 @@ function DashboardPage() {
               />
             ),
           )}
-        </BaseContainer>
+        </MotionBaseContainer>
       )}
     </Layout>
   )

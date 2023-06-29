@@ -14,6 +14,15 @@ import { postStreamer } from '@/helpers'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import type { StreamerType } from 'types'
 import 'twin.macro'
+import { AnimatePresence, motion } from 'framer-motion'
+import type { Variants } from 'framer-motion'
+
+const MotionMessage = motion(Message)
+
+const messageVariants: Variants = {
+  hidden: { opacity: 0, x: -45 },
+  visible: { opacity: 1, x: 0 },
+}
 
 function StreamerForm(props: StreamerFormProps) {
   const { children, modalStateSetter } = props
@@ -115,15 +124,21 @@ function StreamerForm(props: StreamerFormProps) {
           </StyledContainer>
         </Modal.Content>
         <Modal.Footer>
-          {isError && (
-            <Message
-              variant="error"
-              tw="mr-auto"
-            >
-              Oh no, we couldn't submit your streamer.
-              <br /> Please try again later.
-            </Message>
-          )}
+          <AnimatePresence>
+            {isError && (
+              <MotionMessage
+                variants={messageVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variant="error"
+                tw="mr-auto"
+              >
+                Oh no, we couldn't submit your streamer.
+                <br /> Please try again later.
+              </MotionMessage>
+            )}
+          </AnimatePresence>
           <Button>Submit</Button>
         </Modal.Footer>
       </StyledForm>

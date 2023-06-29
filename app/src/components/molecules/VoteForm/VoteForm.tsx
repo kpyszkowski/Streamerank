@@ -12,6 +12,15 @@ import type { VoteFormProps } from '@/components/molecules/VoteForm/VoteForm.typ
 import { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import type { StreamerVoteType } from 'types'
+import { AnimatePresence, motion } from 'framer-motion'
+import type { Variants } from 'framer-motion'
+
+const MotionMessage = motion(Message)
+
+const messageVariants: Variants = {
+  hidden: { opacity: 0, x: -15 },
+  visible: { opacity: 1, x: 0 },
+}
 
 function VoteForm(props: VoteFormProps) {
   const { upVotesCount, downVotesCount, onUpVote, onDownVote, ...restProps } =
@@ -40,9 +49,20 @@ function VoteForm(props: VoteFormProps) {
     <StyledContainer {...restProps}>
       <StyledHeadingWrapper>
         Cast your vote
-        {requestedVoteType && (
-          <Message variant="info">Press again to confirm</Message>
-        )}
+        <AnimatePresence>
+          {requestedVoteType && (
+            <MotionMessage
+              variants={messageVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variant="info"
+              tw="mr-auto"
+            >
+              Press again to confirm
+            </MotionMessage>
+          )}
+        </AnimatePresence>
       </StyledHeadingWrapper>
       <StyledWrapper>
         <StyledButton

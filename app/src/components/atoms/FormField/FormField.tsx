@@ -9,6 +9,15 @@ import {
 import { HiOutlineExclamationCircle } from 'react-icons/hi2'
 import 'twin.macro'
 import { forwardRef } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import type { Variants } from 'framer-motion'
+
+const MotionStyledErrorMessageWrapper = motion(StyledErrorMessageWrapper)
+
+const errorMessageVariants: Variants = {
+  hidden: { opacity: 0, height: 0 },
+  visible: { opacity: 1, height: 'auto' },
+}
 
 const FormField = forwardRef<any, FormFieldProps>((props, ref) => {
   const {
@@ -55,12 +64,19 @@ const FormField = forwardRef<any, FormFieldProps>((props, ref) => {
             ))
           : null}
       </StyledInput>
-      {errorMessage.length > 0 && (
-        <StyledErrorMessageWrapper>
-          <HiOutlineExclamationCircle tw="stroke-current stroke-2" />
-          <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
-        </StyledErrorMessageWrapper>
-      )}
+      <AnimatePresence mode="wait">
+        {errorMessage.length > 0 && (
+          <MotionStyledErrorMessageWrapper
+            variants={errorMessageVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          >
+            <HiOutlineExclamationCircle tw="stroke-current stroke-2" />
+            <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
+          </MotionStyledErrorMessageWrapper>
+        )}
+      </AnimatePresence>
     </StyledContainer>
   )
 })
